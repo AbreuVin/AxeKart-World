@@ -141,6 +141,6 @@ func _on_finished(k: Kart, _t: float) -> void:
 		for i in order.size():
 			var kk: Kart = order[i]
 			var t := RaceHud.fmt(kk.finish_time) if kk.is_finished else "correndo..."
-			lines += "%dº  %s   %s\n" % [i + 1, kk.data.get("display_name", kk.name), t]
+			lines += "%dº  %s   %s\n" % [i + 1, RaceHud.pilot_name(kk.data), t]
 		lines += "\nMelhor volta: %s\n\nR para correr de novo" % RaceHud.fmt(player.best_lap)
 		hud.show_result(lines)

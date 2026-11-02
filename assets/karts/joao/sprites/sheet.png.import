@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu5fr46edmmp"
-path="res://.godot/imported/sheet.png-ce5b29c93a4e60d76db096475efc239e.ctex"
+uid="uid://cknt48cs0ofph"
+path="res://.godot/imported/sheet.png-9cc2f0edfc9f308a195e10f5cb858969.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/karts/violeta/sprites/sheet.png"
-dest_files=["res://.godot/imported/sheet.png-ce5b29c93a4e60d76db096475efc239e.ctex"]
+source_file="res://assets/karts/joao/sprites/sheet.png"
+dest_files=["res://.godot/imported/sheet.png-9cc2f0edfc9f308a195e10f5cb858969.ctex"]
 
 [params]
 

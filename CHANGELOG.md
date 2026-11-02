@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 — elenco na pista
+- César • Ai Cesinhaaa, Lucas • Bananinha e João • JVAFREITAS entram como pilotos CPU,
+  com cabeça da arte do Axé Fight e kart na cor-tema de cada um.
+- Recortador `crop_head.py`; nuca com a cor de cabelo de cada piloto; placeholders removidos.
+- HUD e chegada mostram o vulgo.
+
 ## 0.2.0 — piloto de amostra (Vinicius)
 - Novo gerador de piloto `build_pilot_sheet.py` no traço do Axé Fight, folhas 8×256 px.
 - Vinicius • Balanço da Maré como piloto do jogador, com a cabeça da arte do Axé Fight

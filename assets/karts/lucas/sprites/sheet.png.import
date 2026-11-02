@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://33qx84i1eqjm"
-path="res://.godot/imported/sheet.png-3c7a738149fd816f0cea84efb44ba886.ctex"
+uid="uid://b84mc2gy18qvh"
+path="res://.godot/imported/sheet.png-665a637523befed094262d71aaf031ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/karts/ambar/sprites/sheet.png"
-dest_files=["res://.godot/imported/sheet.png-3c7a738149fd816f0cea84efb44ba886.ctex"]
+source_file="res://assets/karts/lucas/sprites/sheet.png"
+dest_files=["res://.godot/imported/sheet.png-665a637523befed094262d71aaf031ce.ctex"]
 
 [params]
 

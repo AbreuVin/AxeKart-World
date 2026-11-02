@@ -6,6 +6,7 @@ const CYAN := InterfaceTheme.P1
 const VIOLET := InterfaceTheme.P2
 const AMBER := InterfaceTheme.ALERT
 
+var pilot_label: Label
 var lap_label: Label
 var time_label: Label
 var best_label: Label
@@ -19,7 +20,8 @@ var result_label: Label
 
 
 func _ready() -> void:
-	var tl := _panel(Vector2(20, 20), Vector2(260, 116))
+	var tl := _panel(Vector2(20, 20), Vector2(300, 140))
+	pilot_label = _label(tl, 16, AMBER)
 	lap_label = _label(tl, 30, CYAN)
 	time_label = _label(tl, 22, InterfaceTheme.TEXT)
 	best_label = _label(tl, 18, VIOLET)
@@ -83,6 +85,12 @@ func _label(panel: PanelContainer, size: int, color: Color) -> Label:
 	return l
 
 
+static func pilot_name(d: Dictionary) -> String:
+	var v := String(d.get("vulgo", ""))
+	var n := String(d.get("display_name", d.get("id", "?")))
+	return "%s • %s" % [n, v] if v != "" else n
+
+
 static func fmt(t: float) -> String:
 	if t == INF or t <= 0.0:
 		return "--:--.--"
@@ -92,6 +100,7 @@ static func fmt(t: float) -> String:
 
 
 func update_race(k: Kart, position: int, total: int, laps: int) -> void:
+	pilot_label.text = pilot_name(k.data)
 	lap_label.text = "VOLTA %d/%d" % [mini(k.laps_done + 1, laps), laps]
 	time_label.text = "Tempo  " + fmt(k.race_time if not k.is_finished else k.finish_time)
 	best_label.text = "Melhor " + fmt(k.best_lap)

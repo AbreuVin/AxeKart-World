@@ -139,7 +139,7 @@ func _build_visuals() -> void:
 		var rj := right_at(j)
 		var a := samples[i]
 		var b := samples[j]
-		var y := 0.02
+		var y := 0.08
 		var alt := asphalt.lightened(0.04) if (i / 3) % 2 == 0 else asphalt
 		_quad(st, a - ri * hw, a + ri * hw, b + rj * hw, b - rj * hw, alt, y)
 		# zebras
@@ -161,7 +161,7 @@ func _build_visuals() -> void:
 			var z1 := z0 + 1.0
 			var c := Color.WHITE if (cx + cz) % 2 == 0 else Color("#111827")
 			var p := samples[0]
-			_quad(st, p + r0 * w0 + t0 * z0, p + r0 * w1 + t0 * z0, p + r0 * w1 + t0 * z1, p + r0 * w0 + t0 * z1, c, 0.04)
+			_quad(st, p + r0 * w0 + t0 * z0, p + r0 * w1 + t0 * z0, p + r0 * w1 + t0 * z1, p + r0 * w0 + t0 * z1, c, 0.11)
 	st.generate_normals()
 	var road := MeshInstance3D.new()
 	road.name = "Road"
@@ -179,7 +179,7 @@ func _build_visuals() -> void:
 	gm.roughness = 1.0
 	ground.material_override = gm
 	var c := _center()
-	ground.position = Vector3(c.x, 0.0, c.z)
+	ground.position = Vector3(c.x, -0.05, c.z)
 	add_child(ground)
 
 	_build_decoration()

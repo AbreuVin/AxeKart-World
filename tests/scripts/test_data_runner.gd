@@ -15,6 +15,9 @@ func _initialize() -> void:
 				"folha de %s segue o contrato 8x256" % d.get("id"))
 		check(not d.get("placeholder", false) or not d.get("aprovado_por_pessoa", false),
 			"placeholder de %s não finge ser pessoa real" % d.get("id"))
+		check(String(d.get("vulgo", "")) != "", "%s tem vulgo do Axé Fight" % d.get("id"))
+		if d.has("cabeca"):
+			check(FileAccess.file_exists("%s/%s" % [d.base_dir, d.cabeca]), "cabeça de %s existe" % d.get("id"))
 	check(karts[0].get("id") == "vinicius", "Vinicius é o piloto do jogador (amostra)")
 	var t := make_track()
 	check(t.total_length > 600.0, "pista com mais de 600 m (%.0f m)" % t.total_length)

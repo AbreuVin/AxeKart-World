@@ -8,6 +8,11 @@ var height := 3.0
 var _look := Vector3.ZERO
 
 
+func _ready() -> void:
+	near = 0.5
+	far = 900.0
+
+
 func snap() -> void:
 	if target == null:
 		return

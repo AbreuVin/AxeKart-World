@@ -96,7 +96,7 @@ class Cam:
         return self.dot(p, self.d)
 
 
-def head_variants(head_path):
+def head_variants(head_path, hair_hex="#28211c"):
     """Retorna dict: 'lado' (olha à direita), 'costas' (nuca), por silhueta da ilustração."""
     if not head_path:
         return None
@@ -104,17 +104,18 @@ def head_variants(head_path):
     alpha = src.getchannel("A")
     sym = ImageChops.lighter(alpha, alpha.transpose(Image.FLIP_LEFT_RIGHT))  # silhueta simétrica
     w, h = src.size
-    hair = Image.new("RGBA", src.size, (0, 0, 0, 0))
-    dr = ImageDraw.Draw(hair)
+    layer = Image.new("RGBA", src.size, (0, 0, 0, 0))
+    dr = ImageDraw.Draw(layer)
     # nuca: cabelo escuro em cima, pescoço/orelhas embaixo, sombreado em planos
-    dr.rectangle((0, 0, w, int(h * 0.74)), fill=(40, 33, 28, 255))
-    dr.rectangle((0, int(h * 0.40), w // 2, int(h * 0.74)), fill=(30, 25, 21, 255))
+    hair = rgb(hair_hex)
+    dr.rectangle((0, 0, w, int(h * 0.74)), fill=hair + (255,))
+    dr.rectangle((0, int(h * 0.40), w // 2, int(h * 0.74)), fill=mul(hair, 0.78) + (255,))
     dr.rectangle((0, int(h * 0.74), w, h), fill=(150, 104, 76, 255))
     dr.rectangle((0, int(h * 0.74), w // 2, h), fill=(126, 86, 62, 255))
     dr.ellipse((int(w * 0.02), int(h * 0.42), int(w * 0.16), int(h * 0.62)), fill=(164, 114, 84, 255))
     dr.ellipse((int(w * 0.84), int(h * 0.42), int(w * 0.98), int(h * 0.62)), fill=(150, 104, 76, 255))
     back = Image.new("RGBA", src.size, (0, 0, 0, 0))
-    back.paste(hair, (0, 0), sym)
+    back.paste(layer, (0, 0), sym)
     # contorno fino
     edge = sym.filter(ImageFilter.MaxFilter(3))
     out = Image.new("RGBA", src.size, OUTLINE + (0,))
@@ -181,7 +182,7 @@ def render(cfg, heads, k):
 def main():
     kdir = pathlib.Path(sys.argv[1])
     cfg = json.loads((kdir / "kart.json").read_text(encoding="utf-8"))
-    heads = head_variants(kdir / cfg["cabeca"]) if cfg.get("cabeca") else None
+    heads = head_variants(kdir / cfg["cabeca"], cfg.get("cabelo", "#28211c")) if cfg.get("cabeca") else None
     sheet = Image.new("RGBA", (FRAME * FRAMES, FRAME), (0, 0, 0, 0))
     for k in range(FRAMES):
         sheet.paste(render(cfg, heads, k), (k * FRAME, 0))

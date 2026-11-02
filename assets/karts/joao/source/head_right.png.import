@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b26r587ffy0bn"
-path="res://.godot/imported/sheet.png-3ab6a7aabd66b62d8ff45b63f9884ef3.ctex"
+uid="uid://baoonkf0gtxqv"
+path="res://.godot/imported/head_right.png-773638cbd19668bd0f0a685dd37d7a3c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/karts/ciano/sprites/sheet.png"
-dest_files=["res://.godot/imported/sheet.png-3ab6a7aabd66b62d8ff45b63f9884ef3.ctex"]
+source_file="res://assets/karts/joao/source/head_right.png"
+dest_files=["res://.godot/imported/head_right.png-773638cbd19668bd0f0a685dd37d7a3c.ctex"]
 
 [params]
 

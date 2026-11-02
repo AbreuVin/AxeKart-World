@@ -1,6 +1,6 @@
 # 🏎️ AxéKart World — Axélab
 
-Versão 0.2.0 (piloto de amostra) · [Roadmap](docs/ROADMAP.md) · [Guia visual](docs/DESIGN_GUIDE.md)
+Versão 0.3.0 (elenco na pista) · [Roadmap](docs/ROADMAP.md) · [Guia visual](docs/DESIGN_GUIDE.md)
 
 Jogo de kart **2.5D** para o navegador, feito em **Godot 4.7 + GDScript**, sem fins
 lucrativos, para o pessoal do **Axélab — Laboratório de Inovação do TJBA**.
@@ -20,7 +20,7 @@ mesmo jeito de trabalhar com IA (Claude + Codex guiados pelo `AGENTS.md`).
 | Reiniciar | R | Back |
 | Voltar ao menu | Esc | — |
 
-3 voltas contra 3 CPUs. Grama deixa lento; drift carregado dá mini-turbo.
+3 voltas: você é o **Vinicius • Balanço da Maré** contra **César**, **Lucas** e **João**. Grama deixa lento; drift carregado dá mini-turbo.
 
 ## 🚀 Rodar
 

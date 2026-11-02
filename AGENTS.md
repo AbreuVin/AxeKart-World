@@ -14,8 +14,10 @@ Este arquivo é a fonte única de regras: o `CLAUDE.md` só aponta para cá.
   própria). Registre a origem e a licença em `assets/CREDITS.md`.
 - Arte do Axé Fight pode ser reaproveitada (autorizado pelo César em 02/11/2026),
   sempre recortando da arte **ativa** dele e citando em `assets/CREDITS.md`.
-- Piloto de amostra aprovado/pendente: **Vinicius** (Balanço da Maré). Só estender
-  ao resto do elenco depois do ok do usuário.
+- Elenco: Vinicius (jogador), César, Lucas, João — aprovados pelo usuário em 02/11/2026.
+  Novos pilotos: `tools/sprites/crop_head.py` (cabeça da guarda do Axé Fight) +
+  `kart.json` (cor = `theme_color`, vulgo e nome do `character.json` do Axé Fight) +
+  `tools/sprites/build_pilot_sheet.py`. Melhorias de acabamento ficam para depois.
 - Pessoas reais do Axélab só entram como piloto com o ok da própria pessoa.
   Registre a aprovação no `kart.json` (`aprovado_por_pessoa: true`). Fotos de
   referência ficam **fora do Git**.
