@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 — Vinicius ilustrado por IA, kart 13
+- Piloto do Vinicius gerado por IA (Canva) com referências do Axé Fight: cabelo cheio,
+  barba, camiseta preta, calça cáqui e kart vermelho nº 13 em 8 ângulos.
+- Importador `import_generated_sheet.py`: chroma key com despill, recorte por objeto,
+  escala única e apoio no chão.
+- Pendência: vista trás-esquerda é espelhada (número aparece invertido).
+
 ## 0.4.0 — pista Café & Lounge Axélab
 - Nova pista interna (607 m): porcelanato, teto com placas e luminárias redondas,
   paredes com as artes do Café e do Lounge do Axé Fight, mesas altas com banquetas,

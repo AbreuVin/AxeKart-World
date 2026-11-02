@@ -310,6 +310,9 @@ def render(cfg, heads, k):
 def main():
     kdir = pathlib.Path(sys.argv[1])
     cfg = json.loads((kdir / "kart.json").read_text(encoding="utf-8"))
+    if cfg.get("gerado"):
+        print("pulado: %s usa arte gerada por IA (tools/sprites/import_generated_sheet.py)" % kdir)
+        return
     heads = head_variants(kdir / cfg["cabeca"], cfg.get("cabelo", "#28211c")) if cfg.get("cabeca") else None
     sheet = Image.new("RGBA", (FRAME * FRAMES, FRAME), (0, 0, 0, 0))
     for k in range(FRAMES):

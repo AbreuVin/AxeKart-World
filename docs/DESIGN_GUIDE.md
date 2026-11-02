@@ -46,7 +46,13 @@ do Axé Fight e as artes ativas dele.
   (`cabeca` no `kart.json`, olhando para a direita, recortada da arte do Axé Fight).
   Quadros 2–4 usam a cabeça; 5–6 espelhada; 0, 1 e 7 a nuca gerada pela silhueta.
   Sem `cabeca`, o piloto usa capacete (placeholder).
-- Arte final de outra origem (SpriteCook, ilustração) deve obedecer o mesmo contrato.
+- **Arte gerada por IA (padrão de qualidade):** gerar uma grade 4×2 em fundo verde puro
+  (#00FF00) com as 8 vistas na ordem trás, trás-dir, lado dir, frente-dir / frente,
+  frente-esq, lado esq, trás-esq, usando como referência a guarda, o retrato e o design
+  do lutador no Axé Fight. Importar com `tools/sprites/import_generated_sheet.py`
+  (bloco `gerado` no `kart.json`: arquivo, mapa de células, espelhamentos). Escala única
+  pela vista lateral; rodas no chão. Espelhar troca o sentido de números/texto — prefira
+  gerar a vista em vez de espelhar.
 
 ## Pista
 
