@@ -2,7 +2,7 @@
   "id": "vinicius",
   "display_name": "VINICIUS",
   "vulgo": "Balanço da Maré",
-  "cor": "#e0c89b",
+  "cor": "#d7263d",
   "cor_detalhe": "#3b4456",
   "camisa": "#1d1d22",
   "pele": "#b98260",
@@ -15,5 +15,6 @@
   "aprovado_por_pessoa": true,
   "origem_arte": "Cabeça recortada do sprite de guarda do Axé Fight (César), com autorização; kart e corpo gerados por tools/sprites/build_pilot_sheet.py",
   "ordem": 0,
-  "cabelo": "#28211c"
+  "cabelo": "#28211c",
+  "cor_kart_nota": "Vermelho pedido pelo usuário em 02/11/2026"
 }

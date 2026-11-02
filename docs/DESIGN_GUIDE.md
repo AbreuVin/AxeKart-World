@@ -40,8 +40,9 @@ do Axé Fight e as artes ativas dele.
 - Escala 80 px/m: kart de ~2,6 m ocupa ~208 px no quadro de lado; origem nas rodas,
   centralizada, com o chão a `chao_px` (16) px da borda inferior.
 - `pixel_size` 0,0125 m/px; filtro nearest.
-- Gerador: `tools/sprites/build_pilot_sheet.py assets/karts/<id>` — kart e corpo no
-  traço do Axé Fight (contorno fino, sombreamento em 2 tons) + **cabeça ilustrada**
+- Gerador: `tools/sprites/build_pilot_sheet.py assets/karts/<id>` — kart e corpo com
+  **formas arredondadas** (nada de caixas), contorno escuro fino só na silhueta de cada
+  peça e sombreamento em 3 tons, no traço do Axé Fight + **cabeça ilustrada**
   (`cabeca` no `kart.json`, olhando para a direita, recortada da arte do Axé Fight).
   Quadros 2–4 usam a cabeça; 5–6 espelhada; 0, 1 e 7 a nuca gerada pela silhueta.
   Sem `cabeca`, o piloto usa capacete (placeholder).

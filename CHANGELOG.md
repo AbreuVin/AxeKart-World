@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 — karts arredondados
+- Gerador refeito com superfícies arredondadas: carroceria curva, bico afinado, pontões,
+  rodas cilíndricas, tronco e braços até o volante; contorno só na silhueta.
+- Kart do Vinicius vermelho (pedido do usuário).
+
 ## 0.3.0 — elenco na pista
 - César • Ai Cesinhaaa, Lucas • Bananinha e João • JVAFREITAS entram como pilotos CPU,
   com cabeça da arte do Axé Fight e kart na cor-tema de cada um.
