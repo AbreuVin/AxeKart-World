@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 — tela inicial
+- Tela inicial da família do AxéFight: marca **AxéKart** com raios ciano e dourados girando,
+  poeira e névoa em movimento, kart passando e o subtítulo
+  **"Mais Bananas, Mais Bally, Mais Pomodoro e Mais Velocidade"**.
+- Enter, clique, toque ou A/Start começam a corrida; Esc volta ao menu.
+- O relógio da corrida só começa no "VAI!".
+
 ## 0.1.0 — protótipo
 - Pista procedural "Circuito de Teste do Axélab" (zebras, largada quadriculada, palmeiras e pilhas de processos).
 - Kart arcade determinístico: aceleração, freio/ré, grama lenta, barreira, drift com mini-turbo.

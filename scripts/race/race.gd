@@ -113,6 +113,8 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("reiniciar"):
 		get_tree().reload_current_scene()
+	elif event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		get_tree().change_scene_to_file("res://scenes/ui/FrontEnd.tscn")
 
 
 func standings() -> Array[Kart]:

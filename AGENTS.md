@@ -46,6 +46,7 @@ godot --headless --path . --import
 godot --headless --path . --script tests/scripts/test_data_runner.gd
 godot --headless --path . --script tests/scripts/test_kart_runner.gd
 godot --headless --path . --script tests/scripts/test_race_runner.gd
+godot --headless --path . --script tests/scripts/test_frontend_runner.gd
 ```
 
 Mudou física, pista ou voltas → rode os três. Mudou arte → gere a build Web

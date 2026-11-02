@@ -50,7 +50,7 @@ func _ready() -> void:
 	add_child(center_label)
 
 	hint_label = Label.new()
-	hint_label.text = "Setas/WASD: acelerar, frear e virar   Shift/Espaço: drift   R: reiniciar"
+	hint_label.text = "Setas/WASD: acelerar, frear e virar   Shift/Espaço: drift   R: reiniciar   Esc: menu"
 	hint_label.add_theme_font_size_override("font_size", 16)
 	hint_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
 	hint_label.add_theme_color_override("font_outline_color", Color.BLACK)

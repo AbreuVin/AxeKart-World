@@ -35,7 +35,7 @@ jobs:
       - name: Testes headless
         run: |
           ./godot --headless --path . --import
-          for t in data kart race; do ./godot --headless --path . --script tests/scripts/test_${t}_runner.gd || exit 1; done
+          for t in data kart race frontend; do ./godot --headless --path . --script tests/scripts/test_${t}_runner.gd || exit 1; done
       - name: Exporta Web
         run: GODOT=./godot tools/web/export_web.sh
       - uses: actions/upload-pages-artifact@v3

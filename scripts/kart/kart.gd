@@ -77,7 +77,8 @@ func race_progress() -> float:
 
 
 func step(delta: float) -> void:
-	race_time += delta
+	if controls_enabled:
+		race_time += delta
 	var throttle: float = input.throttle if controls_enabled else 0.0
 	var brake: float = input.brake if controls_enabled else 0.0
 	var steer: float = clampf(input.steer, -1.0, 1.0) if controls_enabled else 0.0

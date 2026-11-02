@@ -13,7 +13,8 @@ do Axé Fight e as artes ativas dele.
   perigo coral `#f47983`. Não invente cores novas para a HUD.
 - **Painéis escuros translúcidos**, tipografia clara, viewport lógico 1280×720.
 - **Marca:** logo **AxéKart** no mesmo tratamento do AxéFight (raios ciano e dourado,
-  névoa/poeira leve em movimento). Subtítulo a definir com o usuário.
+  névoa/poeira leve em movimento). Subtítulo aprovado pelo usuário:
+  **"Mais Bananas, Mais Bally, Mais Pomodoro e Mais Velocidade"** (não alterar sem pedido).
 - **Pilotos:** mesmo tratamento dos lutadores — ilustração raster com aspecto vetorial,
   proporções humanas realistas, contorno escuro fino, sombreamento em planos,
   transparência limpa, filtro `nearest`. Nada de pixel art grosseira ou render 3D
