@@ -1,0 +1,53 @@
+name: Web (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixa Godot e templates Web
+        run: |
+          set -e
+          base=https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable
+          curl -sSL -o godot.zip $base/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          unzip -q godot.zip && mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
+          curl -sSL -o tpl.tpz $base/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          T=~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          mkdir -p $T && unzip -q -j tpl.tpz 'templates/web_nothreads_*' 'templates/version.txt' -d $T
+          rm godot.zip tpl.tpz
+      - name: Testes headless
+        run: |
+          ./godot --headless --path . --import
+          for t in data kart race; do ./godot --headless --path . --script tests/scripts/test_${t}_runner.gd || exit 1; done
+      - name: Exporta Web
+        run: GODOT=./godot tools/web/export_web.sh
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

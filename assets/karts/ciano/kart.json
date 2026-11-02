@@ -1,0 +1,12 @@
+{
+  "id": "ciano",
+  "display_name": "Piloto Ciano",
+  "vulgo": "",
+  "cor": "#22d3ee",
+  "sprite": "sprites/sheet.png",
+  "frames": 8,
+  "pixel_size": 0.025,
+  "placeholder": true,
+  "aprovado_por_pessoa": false,
+  "ordem": 0
+}
