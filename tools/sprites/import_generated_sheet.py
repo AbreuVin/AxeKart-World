@@ -32,6 +32,21 @@ def key_green(rgb):
     return out
 
 
+def unflip_text(cell):
+    """Depois de espelhar, desvira só as áreas de texto claro (ex.: número do kart)."""
+    rgb = cell[..., :3].astype(int)
+    white = (rgb.min(axis=2) > 205) & (cell[..., 3] > 200)
+    lab, n = ndimage.label(ndimage.binary_dilation(white, iterations=5))
+    for sl in ndimage.find_objects(lab):
+        ys, xs = sl
+        h, w = ys.stop - ys.start, xs.stop - xs.start
+        if 12 < w < 160 and 10 < h < 110 and white[sl].sum() > 40:
+            y0, y1 = max(0, ys.start - 2), ys.stop + 2
+            x0, x1 = max(0, xs.start - 2), xs.stop + 2
+            cell[y0:y1, x0:x1] = cell[y0:y1, x0:x1][:, ::-1]
+    return cell
+
+
 def bbox(alpha, thr=40):
     ys, xs = np.nonzero(alpha > thr)
     return xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
@@ -71,6 +86,8 @@ def main():
     for k in range(8):
         if k in mirrors:
             cell = cells[mirrors[k]][:, ::-1].copy()
+            if g.get("desvirar_texto"):
+                cell = unflip_text(cell)
         else:
             cell = cells[g["mapa"][k]]
         bx0, by0, bx1, by1 = bbox(cell[..., 3])

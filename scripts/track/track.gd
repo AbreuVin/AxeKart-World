@@ -193,6 +193,8 @@ func _build_visuals() -> void:
 	ground.position = Vector3(c.x, -0.05, c.z)
 	add_child(ground)
 
+	if interno:
+		_build_barrier()
 	if data.has("paredes"):
 		_build_room()
 	if interno:
@@ -471,3 +473,46 @@ func _build_decoration_interno() -> void:
 			_box(node, Vector3(2.4, 0.15, 1.0), Vector3(1.3, 1.27, 0.5), Color("#1f3f86"))
 		add_child(node)
 		placed += 1
+
+
+## Barreira visível (blocos de espuma ciano/violeta) exatamente onde fica o limite físico.
+func _build_barrier() -> void:
+	var zebra: Array = data.get("barreira", ["#62d8e8", "#b5a2f3"])
+	var ca := Color(String(zebra[0]))
+	var cb := Color(String(zebra[1]))
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.roughness = 0.8
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_material(mat)
+	var m := samples.size()
+	var off := road_width * 0.5 + BARRIER_EXTRA + 1.0   # kart tem ~0,9 m de meia largura
+	var h := 0.9
+	var w := 0.8
+	for side: float in [-1.0, 1.0]:
+		for i in m:
+			var j := (i + 1) % m
+			var col := ca if (i / 3) % 2 == 0 else cb
+			var a := samples[i] + right_at(i) * off * side
+			var b := samples[j] + right_at(j) * off * side
+			var ao := a + right_at(i) * w * side
+			var bo := b + right_at(j) * w * side
+			var up := Vector3.UP * h
+			# face interna, topo e face externa
+			_wall_quad(st, a, b, b + up, a + up, col.darkened(0.1))
+			_wall_quad(st, a + up, b + up, bo + up, ao + up, col.lightened(0.15))
+			_wall_quad(st, ao, bo, bo + up, ao + up, col.darkened(0.25))
+	st.generate_normals()
+	var mi := MeshInstance3D.new()
+	mi.name = "Barreira"
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	add_child(mi)
+
+
+static func _wall_quad(st: SurfaceTool, p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, c: Color) -> void:
+	for p in [p0, p1, p2, p0, p2, p3]:
+		st.set_color(c)
+		st.add_vertex(p)

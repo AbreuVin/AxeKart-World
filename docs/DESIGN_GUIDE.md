@@ -51,8 +51,8 @@ do Axé Fight e as artes ativas dele.
   frente-esq, lado esq, trás-esq, usando como referência a guarda, o retrato e o design
   do lutador no Axé Fight. Importar com `tools/sprites/import_generated_sheet.py`
   (bloco `gerado` no `kart.json`: arquivo, mapa de células, espelhamentos). Escala única
-  pela vista lateral; rodas no chão. Espelhar troca o sentido de números/texto — prefira
-  gerar a vista em vez de espelhar.
+  pela vista lateral; rodas no chão. Espelhar troca o sentido de números/texto: use
+  `"desvirar_texto": true` no bloco `gerado` para desvirar as áreas de texto claro.
 
 ## Pista
 

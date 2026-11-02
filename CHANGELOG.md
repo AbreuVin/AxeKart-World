@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1 — barreira visível e número corrigido
+- Barreira de espuma ciano/violeta (tokens do Axé Fight) exatamente no limite físico da pista interna.
+- `import_generated_sheet.py` desvira o texto em quadros espelhados (`desvirar_texto`): o 13 do
+  Vinicius aparece certo em todos os ângulos.
+- `export_web.sh` falha se houver erro de script (antes exportava um jogo quebrado).
+
 ## 0.6.0 — elenco todo ilustrado
 - César (kart verde-água), Lucas (azul-marinho) e João (ciano claro) gerados por IA (Canva)
   a partir das guardas do Axé Fight e importados com `import_generated_sheet.py`.
@@ -10,7 +16,6 @@
   barba, camiseta preta, calça cáqui e kart vermelho nº 13 em 8 ângulos.
 - Importador `import_generated_sheet.py`: chroma key com despill, recorte por objeto,
   escala única e apoio no chão.
-- Pendência: vista trás-esquerda é espelhada (número aparece invertido).
 
 ## 0.4.0 — pista Café & Lounge Axélab
 - Nova pista interna (607 m): porcelanato, teto com placas e luminárias redondas,
