@@ -2,7 +2,7 @@ class_name Race
 extends Node3D
 ## Monta a corrida: pista, karts (1 jogador + CPUs), câmera, HUD, contagem e chegada.
 
-const TRACK_ID := "circuito_teste"
+const TRACK_ID := "cafe_lounge"
 const COUNTDOWN := 3.0
 const CPU_SKILLS := [0.95, 0.92, 0.89]
 const CPU_LANES := [-2.5, 2.5, 0.0]
@@ -21,11 +21,12 @@ var headless := false
 
 func _ready() -> void:
 	PlayerInput.ensure_actions()
-	_build_environment()
+	var tdata := DataLoader.load_track(TRACK_ID)
+	_build_environment(String(tdata.get("tema", "")) == "interno")
 	track = Track.new()
 	track.name = "Track"
 	add_child(track)
-	track.setup(DataLoader.load_track(TRACK_ID), not headless)
+	track.setup(tdata, not headless)
 
 	var datas := DataLoader.load_karts()
 	for slot in datas.size():
@@ -56,7 +57,7 @@ func _ready() -> void:
 		add_child(hud)
 
 
-func _build_environment() -> void:
+func _build_environment(interno := false) -> void:
 	if headless:
 		return
 	var env := WorldEnvironment.new()
@@ -75,11 +76,18 @@ func _build_environment() -> void:
 	e.fog_enabled = true
 	e.fog_light_color = Color("#bfe3ff")
 	e.fog_density = 0.004
+	if interno:
+		e.background_mode = Environment.BG_COLOR
+		e.background_color = Color("#1a2230")
+		e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+		e.ambient_light_color = Color("#d8dde6")
+		e.ambient_light_energy = 0.75
+		e.fog_enabled = false
 	env.environment = e
 	add_child(env)
 	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55, 35, 0)
-	sun.light_energy = 1.1
+	sun.rotation_degrees = Vector3(-70, 25, 0) if interno else Vector3(-55, 35, 0)
+	sun.light_energy = 0.9 if interno else 1.1
 	sun.shadow_enabled = false
 	add_child(sun)
 

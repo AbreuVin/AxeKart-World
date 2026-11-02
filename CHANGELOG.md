@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 — pista Café & Lounge Axélab
+- Nova pista interna (607 m): porcelanato, teto com placas e luminárias redondas,
+  paredes com as artes do Café e do Lounge do Axé Fight, mesas altas com banquetas,
+  jardineiras, cabines coloridas, estantes de nichos e bancos do Lounge.
+- Zebras em ciano/branco (tokens do Axé Fight). Circuito de teste mantido para os testes de física.
+
 ## 0.3.1 — karts arredondados
 - Gerador refeito com superfícies arredondadas: carroceria curva, bico afinado, pontões,
   rodas cilíndricas, tronco e braços até o volante; contorno só na silhueta.

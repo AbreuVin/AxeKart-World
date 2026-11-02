@@ -1,6 +1,6 @@
 # 🏎️ AxéKart World — Axélab
 
-Versão 0.3.1 (karts arredondados) · [Roadmap](docs/ROADMAP.md) · [Guia visual](docs/DESIGN_GUIDE.md)
+Versão 0.4.0 (pista Café & Lounge Axélab) · [Roadmap](docs/ROADMAP.md) · [Guia visual](docs/DESIGN_GUIDE.md)
 
 Jogo de kart **2.5D** para o navegador, feito em **Godot 4.7 + GDScript**, sem fins
 lucrativos, para o pessoal do **Axélab — Laboratório de Inovação do TJBA**.

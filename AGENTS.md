@@ -14,6 +14,8 @@ Este arquivo é a fonte única de regras: o `CLAUDE.md` só aponta para cá.
   própria). Registre a origem e a licença em `assets/CREDITS.md`.
 - Arte do Axé Fight pode ser reaproveitada (autorizado pelo César em 02/11/2026),
   sempre recortando da arte **ativa** dele e citando em `assets/CREDITS.md`.
+- **Vinicius tem cabelo curto e cheio** (não é calvo): nunca descrever "entradas"
+  ou calvície em prompts de arte. O kart dele é **vermelho com o número 13**.
 - Elenco: Vinicius (jogador), César, Lucas, João — aprovados pelo usuário em 02/11/2026.
   Novos pilotos: `tools/sprites/crop_head.py` (cabeça da guarda do Axé Fight) +
   `kart.json` (cor = `theme_color`, vulgo e nome do `character.json` do Axé Fight) +

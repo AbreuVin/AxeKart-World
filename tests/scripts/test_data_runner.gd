@@ -29,4 +29,22 @@ func _initialize() -> void:
 		var info := t.nearest(g.origin)
 		check(absf(info.lateral) < t.road_width * 0.5, "largada %d dentro da pista" % s)
 		check(info.fraction > 0.9, "largada %d antes da linha" % s)
+	# pista do Café & Lounge Axélab
+	var c := Track.new()
+	root.add_child(c)
+	c.setup(DataLoader.load_track("cafe_lounge"), false)
+	check(c.total_length > 500.0, "Café & Lounge com mais de 500 m (%.0f m)" % c.total_length)
+	check(String(c.data.get("tema", "")) == "interno", "Café & Lounge é pista interna")
+	for s in 4:
+		var info := c.nearest(c.grid_transform(s).origin)
+		check(absf(info.lateral) < c.road_width * 0.5 and info.fraction > 0.9, "largada %d ok no Café & Lounge" % s)
+	for key in ["norte", "sul", "leste", "oeste"]:
+		var rel := String(c.data.paredes.get(key, ""))
+		check(ResourceLoader.exists("res://assets/tracks/cafe_lounge/" + rel), "parede %s com arte do Axé Fight" % key)
+	var b := c.bounds()
+	var inside := true
+	for p in c.samples:
+		if not b.grow(-Track.ROOM_MARGIN + 8.0).has_point(Vector2(p.x, p.z)):
+			inside = false
+	check(inside, "pista inteira dentro da sala")
 	finish()

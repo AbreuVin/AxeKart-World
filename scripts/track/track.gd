@@ -123,6 +123,10 @@ func grid_transform(slot: int) -> Transform3D:
 func _build_visuals() -> void:
 	var asphalt := Color(String(data.get("cor_asfalto", "#3b3f4a")))
 	var grass := Color(String(data.get("cor_grama", "#4d9b4a")))
+	var zebra: Array = data.get("zebra", ["#e11d48", "#f8fafc"])
+	var curb_a := Color(String(zebra[0]))
+	var curb_b := Color(String(zebra[1]))
+	var interno := String(data.get("tema", "")) == "interno"
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -143,7 +147,7 @@ func _build_visuals() -> void:
 		var alt := asphalt.lightened(0.04) if (i / 3) % 2 == 0 else asphalt
 		_quad(st, a - ri * hw, a + ri * hw, b + rj * hw, b - rj * hw, alt, y)
 		# zebras
-		var curb := Color("#e11d48") if (i / 2) % 2 == 0 else Color("#f8fafc")
+		var curb := curb_a if (i / 2) % 2 == 0 else curb_b
 		_quad(st, a + ri * hw, a + ri * (hw + CURB_WIDTH), b + rj * (hw + CURB_WIDTH), b + rj * hw, curb, y + 0.01)
 		_quad(st, a - ri * (hw + CURB_WIDTH), a - ri * hw, b - rj * hw, b - rj * (hw + CURB_WIDTH), curb, y + 0.01)
 		# faixa central tracejada
@@ -177,12 +181,24 @@ func _build_visuals() -> void:
 	var gm := StandardMaterial3D.new()
 	gm.albedo_color = grass
 	gm.roughness = 1.0
+	if interno:
+		gm.albedo_color = Color.WHITE
+		gm.albedo_texture = _tile_texture(grass, 128, 2)
+		gm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+		gm.uv1_scale = Vector3(900.0 / 4.0, 900.0 / 4.0, 1.0)
+		gm.roughness = 0.35
+		gm.metallic_specular = 0.6
 	ground.material_override = gm
 	var c := _center()
 	ground.position = Vector3(c.x, -0.05, c.z)
 	add_child(ground)
 
-	_build_decoration()
+	if data.has("paredes"):
+		_build_room()
+	if interno:
+		_build_decoration_interno()
+	else:
+		_build_decoration()
 
 
 func _center() -> Vector3:
@@ -269,3 +285,189 @@ func _flat_mat(c: Color) -> StandardMaterial3D:
 	m.albedo_color = c
 	m.roughness = 1.0
 	return m
+
+
+# ---------- cenário interno (Café & Lounge Axélab) ----------
+
+const ROOM_MARGIN := 26.0
+const ROOM_HEIGHT := 14.0
+
+
+func bounds() -> Rect2:
+	var r := Rect2(Vector2(samples[0].x, samples[0].z), Vector2.ZERO)
+	for p in samples:
+		r = r.expand(Vector2(p.x, p.z))
+	return r.grow(ROOM_MARGIN)
+
+
+## Porcelanato: ladrilho com rejunte, gerado em código.
+static func _tile_texture(base: Color, size: int, grout: int) -> ImageTexture:
+	var img := Image.create(size, size, true, Image.FORMAT_RGB8)
+	img.fill(base)
+	var line := base.darkened(0.12)
+	for i in size:
+		for g in grout:
+			img.set_pixel(i, g, line)
+			img.set_pixel(g, i, line)
+	# leve variação de brilho
+	for y in range(grout, size):
+		for x in range(grout, size):
+			if (x + y) % 23 == 0:
+				img.set_pixel(x, y, base.lightened(0.05))
+	img.generate_mipmaps()
+	return ImageTexture.create_from_image(img)
+
+
+func _wall_mat(rel: String, repeat_x: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	var path := "%s/%s/%s" % [DataLoader.TRACKS_DIR, data.get("id", ""), rel]
+	if ResourceLoader.exists(path):
+		m.albedo_texture = load(path)
+	else:
+		m.albedo_color = Color("#2f5d3a")
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.uv1_scale = Vector3(repeat_x, 1.0, 1.0)
+	m.texture_repeat = true
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m
+
+
+func _build_room() -> void:
+	var b := bounds()
+	var walls: Dictionary = data.get("paredes", {})
+	var h := ROOM_HEIGHT
+	# (centro, tamanho, rotação Y, chave)
+	var specs := [
+		[Vector3(b.get_center().x, h / 2, b.position.y), Vector2(b.size.x, h), 0.0, "norte"],
+		[Vector3(b.get_center().x, h / 2, b.end.y), Vector2(b.size.x, h), PI, "sul"],
+		[Vector3(b.end.x, h / 2, b.get_center().y), Vector2(b.size.y, h), -PI / 2, "leste"],
+		[Vector3(b.position.x, h / 2, b.get_center().y), Vector2(b.size.y, h), PI / 2, "oeste"],
+	]
+	for sp in specs:
+		var mi := MeshInstance3D.new()
+		mi.name = "Parede_%s" % sp[3]
+		var q := QuadMesh.new()
+		q.size = sp[1]
+		mi.mesh = q
+		var tex_w := h * 1024.0 / 380.0   # proporção da arte recortada
+		mi.material_override = _wall_mat(String(walls.get(sp[3], "")), maxf(1.0, round(sp[1].x / tex_w)))
+		mi.position = sp[0]
+		mi.rotation.y = sp[2]
+		add_child(mi)
+	# teto com placas e luminárias redondas (como no Lounge)
+	var ceil := MeshInstance3D.new()
+	var cp := PlaneMesh.new()
+	cp.size = b.size
+	cp.flip_faces = true
+	ceil.mesh = cp
+	var cm := StandardMaterial3D.new()
+	cm.albedo_texture = _tile_texture(Color("#c3cbd6"), 128, 2)
+	cm.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	cm.uv1_scale = Vector3(b.size.x / 3.0, b.size.y / 3.0, 1.0)
+	cm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	ceil.material_override = cm
+	ceil.position = Vector3(b.get_center().x, h, b.get_center().y)
+	add_child(ceil)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 99
+	var lamp_cols := [Color("#1f3f86"), Color("#eef3fa"), Color("#1f3f86")]
+	for i in 26:
+		var lamp := MeshInstance3D.new()
+		var cyl := CylinderMesh.new()
+		var r := rng.randf_range(1.6, 3.2)
+		cyl.top_radius = r
+		cyl.bottom_radius = r
+		cyl.height = 0.35
+		lamp.mesh = cyl
+		lamp.material_override = _flat_mat(lamp_cols[i % 3])
+		lamp.position = Vector3(rng.randf_range(b.position.x + 6, b.end.x - 6), h - rng.randf_range(2.5, 4.0),
+			rng.randf_range(b.position.y + 6, b.end.y - 6))
+		add_child(lamp)
+
+
+func _free_spot(rng: RandomNumberGenerator, min_gap: float) -> Vector3:
+	var b := bounds().grow(-4.0)
+	for t in 60:
+		var p := Vector3(rng.randf_range(b.position.x, b.end.x), 0, rng.randf_range(b.position.y, b.end.y))
+		if absf(nearest(p).lateral) > road_width * 0.5 + min_gap:
+			return p
+	return Vector3.INF
+
+
+func _box(parent: Node3D, size: Vector3, pos: Vector3, col: Color) -> void:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.material_override = _flat_mat(col)
+	mi.position = pos
+	parent.add_child(mi)
+
+
+func _build_decoration_interno() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = int(data.get("semente_decoracao", 1))
+	var wood := Color("#8b5a2b")
+	var black := Color("#1b1f27")
+	var b := bounds()
+	var mid_z := b.get_center().y
+	var placed := 0
+	var wanted := int(data.get("decoracao", 40))
+	while placed < wanted:
+		var p := _free_spot(rng, 9.0)
+		if p == Vector3.INF:
+			break
+		var node := Node3D.new()
+		node.position = p
+		node.rotation.y = rng.randf_range(-0.3, 0.3)
+		var cafe := p.z < mid_z
+		var kind := rng.randi_range(0, 2)
+		if cafe and kind < 2:
+			# mesa alta de madeira com banquetas pretas
+			_box(node, Vector3(5.0, 0.15, 1.4), Vector3(0, 1.9, 0), wood)
+			for sx in [-2.2, 2.2]:
+				_box(node, Vector3(0.12, 1.9, 0.12), Vector3(sx, 0.95, 0), black)
+			for k in 4:
+				var sx := -1.8 + k * 1.2
+				for sz in [-1.1, 1.1]:
+					_box(node, Vector3(0.5, 0.08, 0.5), Vector3(sx, 1.3, sz), black)
+					_box(node, Vector3(0.06, 1.3, 0.06), Vector3(sx, 0.65, sz), black)
+		elif cafe:
+			# jardineira da parede verde
+			_box(node, Vector3(4.0, 1.0, 1.2), Vector3(0, 0.5, 0), Color("#3d2f24"))
+			for k in 6:
+				var leaf := MeshInstance3D.new()
+				var sm := SphereMesh.new()
+				sm.radius = rng.randf_range(0.6, 1.0)
+				sm.height = sm.radius * 2.0
+				leaf.mesh = sm
+				leaf.material_override = _flat_mat(Color("#2f7d3a").lightened(rng.randf_range(0.0, 0.2)))
+				leaf.position = Vector3(-1.6 + k * 0.65, 1.3 + rng.randf_range(0, 0.4), 0)
+				node.add_child(leaf)
+		elif kind == 0:
+			# cabine do lounge (amarela, azul ou vermelha)
+			var cols := [Color("#e9b52f"), Color("#1f3f86"), Color("#b3262e")]
+			var c: Color = cols[rng.randi_range(0, 2)]
+			_box(node, Vector3(4.2, 3.4, 0.25), Vector3(0, 1.7, -1.4), c)
+			_box(node, Vector3(0.25, 3.4, 3.0), Vector3(-2.1, 1.7, 0), wood)
+			_box(node, Vector3(0.25, 3.4, 3.0), Vector3(2.1, 1.7, 0), wood)
+			_box(node, Vector3(4.4, 0.25, 3.0), Vector3(0, 3.5, 0), wood)
+			_box(node, Vector3(3.6, 0.5, 0.8), Vector3(0, 0.45, -0.9), Color("#c0303a"))
+			_box(node, Vector3(1.2, 0.08, 0.8), Vector3(0, 1.1, 0.2), Color("#eef3fa"))
+		elif kind == 1:
+			# estante de nichos coloridos
+			var cube_cols := [Color("#e9b52f"), Color("#1f3f86"), Color("#b3262e")]
+			_box(node, Vector3(5.2, 3.6, 1.0), Vector3(0, 1.8, 0), wood)
+			for yy in 3:
+				for xx in 4:
+					_box(node, Vector3(1.0, 0.9, 1.05), Vector3(-1.8 + xx * 1.2, 0.6 + yy * 1.15, 0),
+						cube_cols[(xx + yy * 2 + rng.randi_range(0, 2)) % 3])
+		else:
+			# banco colorido em degraus
+			_box(node, Vector3(5.0, 0.6, 2.0), Vector3(0, 0.3, 0), wood)
+			_box(node, Vector3(5.0, 0.15, 2.0), Vector3(0, 0.67, 0), Color("#e9b52f"))
+			_box(node, Vector3(5.0, 0.6, 1.0), Vector3(0, 0.9, 0.5), wood)
+			_box(node, Vector3(2.4, 0.15, 1.0), Vector3(-1.2, 1.27, 0.5), Color("#b3262e"))
+			_box(node, Vector3(2.4, 0.15, 1.0), Vector3(1.3, 1.27, 0.5), Color("#1f3f86"))
+		add_child(node)
+		placed += 1

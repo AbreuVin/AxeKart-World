@@ -1,0 +1,91 @@
+{
+  "id": "cafe_lounge",
+  "nome": "Café & Lounge Axélab",
+  "voltas": 3,
+  "largura": 12.0,
+  "pontos": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      -60
+    ],
+    [
+      15,
+      -92
+    ],
+    [
+      50,
+      -104
+    ],
+    [
+      92,
+      -98
+    ],
+    [
+      112,
+      -72
+    ],
+    [
+      102,
+      -42
+    ],
+    [
+      76,
+      -30
+    ],
+    [
+      70,
+      0
+    ],
+    [
+      92,
+      20
+    ],
+    [
+      122,
+      30
+    ],
+    [
+      134,
+      62
+    ],
+    [
+      114,
+      88
+    ],
+    [
+      72,
+      94
+    ],
+    [
+      40,
+      74
+    ],
+    [
+      18,
+      50
+    ],
+    [
+      0,
+      34
+    ]
+  ],
+  "tema": "interno",
+  "cor_asfalto": "#2b3445",
+  "cor_grama": "#5d6f8c",
+  "zebra": [
+    "#62d8e8",
+    "#eef3fa"
+  ],
+  "paredes": {
+    "norte": "source/parede_cafe.jpg",
+    "sul": "source/parede_lounge.jpg",
+    "leste": "source/parede_verde.jpg",
+    "oeste": "source/parede_verde.jpg"
+  },
+  "semente_decoracao": 7,
+  "decoracao": 46
+}
