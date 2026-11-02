@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 — elenco todo ilustrado
+- César (kart verde-água), Lucas (azul-marinho) e João (ciano claro) gerados por IA (Canva)
+  a partir das guardas do Axé Fight e importados com `import_generated_sheet.py`.
+- Lateral esquerda do Lucas espelhada da direita (sem texto, sem efeito colateral).
+
 ## 0.5.0 — Vinicius ilustrado por IA, kart 13
 - Piloto do Vinicius gerado por IA (Canva) com referências do Axé Fight: cabelo cheio,
   barba, camiseta preta, calça cáqui e kart vermelho nº 13 em 8 ângulos.

@@ -19,7 +19,9 @@ Este arquivo é a fonte única de regras: o `CLAUDE.md` só aponta para cá.
 - Elenco: Vinicius (jogador), César, Lucas, João — aprovados pelo usuário em 02/11/2026.
   Novos pilotos: `tools/sprites/crop_head.py` (cabeça da guarda do Axé Fight) +
   `kart.json` (cor = `theme_color`, vulgo e nome do `character.json` do Axé Fight) +
-  `tools/sprites/build_pilot_sheet.py`. Melhorias de acabamento ficam para depois.
+  `tools/sprites/build_pilot_sheet.py` (rascunho). Padrão final: arte gerada por IA
+  (Canva) + `tools/sprites/import_generated_sheet.py` — ver `docs/DESIGN_GUIDE.md`.
+  Download do Canva pelo Playwright do usuário, já logado, salvando em Downloads.
 - Pessoas reais do Axélab só entram como piloto com o ok da própria pessoa.
   Registre a aprovação no `kart.json` (`aprovado_por_pessoa: true`). Fotos de
   referência ficam **fora do Git**.

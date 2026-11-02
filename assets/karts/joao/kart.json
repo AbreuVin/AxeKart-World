@@ -13,7 +13,24 @@
   "chao_px": 16,
   "placeholder": false,
   "aprovado_por_pessoa": true,
-  "origem_arte": "Cabeça recortada do sprite de guarda do Axé Fight (César), com autorização; kart e corpo gerados por tools/sprites/build_pilot_sheet.py",
+  "origem_arte": "Gerado por IA (Canva) a partir da arte do Axé Fight (César), com autorização; importado por tools/sprites/import_generated_sheet.py",
   "ordem": 3,
-  "cabelo": "#1a1411"
+  "cabelo": "#1a1411",
+  "gerado": {
+    "arquivo": "source/gerado_canva.png",
+    "colunas": 4,
+    "linhas": 2,
+    "mapa": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "espelhar": {},
+    "origem": "Canva generate-image (02/11/2026) com a guarda do Axé Fight como referência"
+  }
 }
