@@ -11,10 +11,11 @@ func _initialize() -> void:
 		var tex = load("%s/%s" % [d.base_dir, d.get("sprite", "")])
 		check(tex is Texture2D, "sprite de %s carrega" % d.get("id"))
 		if tex is Texture2D:
-			check(tex.get_width() == 128 * int(d.get("frames", 8)) and tex.get_height() == 128,
-				"folha de %s segue o contrato 8x128" % d.get("id"))
+			check(tex.get_width() == 256 * int(d.get("frames", 8)) and tex.get_height() == 256,
+				"folha de %s segue o contrato 8x256" % d.get("id"))
 		check(not d.get("placeholder", false) or not d.get("aprovado_por_pessoa", false),
 			"placeholder de %s não finge ser pessoa real" % d.get("id"))
+	check(karts[0].get("id") == "vinicius", "Vinicius é o piloto do jogador (amostra)")
 	var t := make_track()
 	check(t.total_length > 600.0, "pista com mais de 600 m (%.0f m)" % t.total_length)
 	check(t.samples[0].distance_to(t.samples[t.sample_count() - 1]) < 15.0, "pista fechada")

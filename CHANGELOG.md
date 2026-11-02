@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0 — piloto de amostra (Vinicius)
+- Novo gerador de piloto `build_pilot_sheet.py` no traço do Axé Fight, folhas 8×256 px.
+- Vinicius • Balanço da Maré como piloto do jogador, com a cabeça da arte do Axé Fight
+  (camiseta preta, kart cáqui na cor-tema dele). CPUs com capacete até a aprovação.
+
 ## 0.1.1 — tela inicial
 - Tela inicial da família do AxéFight: marca **AxéKart** com raios ciano e dourados girando,
   poeira e névoa em movimento, kart passando e o subtítulo

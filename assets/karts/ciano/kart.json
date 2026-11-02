@@ -2,11 +2,16 @@
   "id": "ciano",
   "display_name": "Piloto Ciano",
   "vulgo": "",
-  "cor": "#22d3ee",
+  "cor": "#62d8e8",
   "sprite": "sprites/sheet.png",
   "frames": 8,
-  "pixel_size": 0.025,
+  "pixel_size": 0.0125,
   "placeholder": true,
   "aprovado_por_pessoa": false,
-  "ordem": 0
+  "ordem": 1,
+  "cor_detalhe": "#3b4456",
+  "camisa": "#e6e9ef",
+  "pele": "#b98260",
+  "capacete": "#0e5f6b",
+  "chao_px": 16
 }

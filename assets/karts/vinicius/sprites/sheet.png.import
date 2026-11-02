@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ui2xrudyv7hb"
-path="res://.godot/imported/sheet.png-d6b128763bd1ff4a2f0609df42bade1a.ctex"
+uid="uid://dva2ns62hhppm"
+path="res://.godot/imported/sheet.png-0babdf14a18044892ea2da822e22be07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/karts/coral/sprites/sheet.png"
-dest_files=["res://.godot/imported/sheet.png-d6b128763bd1ff4a2f0609df42bade1a.ctex"]
+source_file="res://assets/karts/vinicius/sprites/sheet.png"
+dest_files=["res://.godot/imported/sheet.png-0babdf14a18044892ea2da822e22be07.ctex"]
 
 [params]
 

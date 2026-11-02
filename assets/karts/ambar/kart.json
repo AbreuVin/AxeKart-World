@@ -2,11 +2,16 @@
   "id": "ambar",
   "display_name": "Piloto Âmbar",
   "vulgo": "",
-  "cor": "#fbbf24",
+  "cor": "#f0bd6b",
   "sprite": "sprites/sheet.png",
   "frames": 8,
-  "pixel_size": 0.025,
+  "pixel_size": 0.0125,
   "placeholder": true,
   "aprovado_por_pessoa": false,
-  "ordem": 2
+  "ordem": 3,
+  "cor_detalhe": "#3b4456",
+  "camisa": "#e6e9ef",
+  "pele": "#b98260",
+  "capacete": "#8a5a12",
+  "chao_px": 16
 }

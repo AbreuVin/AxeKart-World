@@ -12,6 +12,10 @@ Este arquivo é a fonte única de regras: o `CLAUDE.md` só aponta para cá.
   gênero é livre; cópia não.
 - Assets externos só com licença CC0 ou feitos por nós (código, SpriteCook, arte
   própria). Registre a origem e a licença em `assets/CREDITS.md`.
+- Arte do Axé Fight pode ser reaproveitada (autorizado pelo César em 02/11/2026),
+  sempre recortando da arte **ativa** dele e citando em `assets/CREDITS.md`.
+- Piloto de amostra aprovado/pendente: **Vinicius** (Balanço da Maré). Só estender
+  ao resto do elenco depois do ok do usuário.
 - Pessoas reais do Axélab só entram como piloto com o ok da própria pessoa.
   Registre a aprovação no `kart.json` (`aprovado_por_pessoa: true`). Fotos de
   referência ficam **fora do Git**.

@@ -33,15 +33,19 @@ do Axé Fight e as artes ativas dele.
 
 ## Sprite do piloto (contrato)
 
-- Folha horizontal com **8 quadros** de 128×128 px, fundo transparente.
+- Folha horizontal com **8 quadros** de 256×256 px, fundo transparente.
 - Quadro `k` = kart visto com a câmera a `k × 45°` ao redor dele,
   partindo de **trás** (k=0) e girando para a **direita** do kart
   (k=2 lado direito, k=4 frente, k=6 lado esquerdo). Elevação da câmera ≈ 18°.
-- Kart de ~2,6 m ocupa ~104 px de largura no quadro de lado; origem nos pés das rodas,
-  centralizada, com o chão a 8 px da borda inferior.
-- `pixel_size` padrão 0,025 m/px; filtro nearest.
-- O placeholder é gerado por `tools/sprites/make_placeholder_kart.py`;
-  a arte final (SpriteCook ou ilustração) deve obedecer o mesmo contrato.
+- Escala 80 px/m: kart de ~2,6 m ocupa ~208 px no quadro de lado; origem nas rodas,
+  centralizada, com o chão a `chao_px` (16) px da borda inferior.
+- `pixel_size` 0,0125 m/px; filtro nearest.
+- Gerador: `tools/sprites/build_pilot_sheet.py assets/karts/<id>` — kart e corpo no
+  traço do Axé Fight (contorno fino, sombreamento em 2 tons) + **cabeça ilustrada**
+  (`cabeca` no `kart.json`, olhando para a direita, recortada da arte do Axé Fight).
+  Quadros 2–4 usam a cabeça; 5–6 espelhada; 0, 1 e 7 a nuca gerada pela silhueta.
+  Sem `cabeca`, o piloto usa capacete (placeholder).
+- Arte final de outra origem (SpriteCook, ilustração) deve obedecer o mesmo contrato.
 
 ## Pista
 

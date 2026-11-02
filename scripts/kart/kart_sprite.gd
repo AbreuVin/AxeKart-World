@@ -19,8 +19,9 @@ func setup(k: Kart, base_dir: String, d: Dictionary) -> void:
 	alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 	shaded = false
 	centered = true
-	# origem nos pés: o quadro tem 8 px de chão abaixo das rodas
-	offset = Vector2(0, 64 - 8)
+	# origem nos pés: o quadro tem `chao_px` de chão abaixo das rodas
+	var frame_h := texture.get_height() if texture else 256
+	offset = Vector2(0, frame_h / 2.0 - float(d.get("chao_px", 16)))
 
 
 func _process(delta: float) -> void:

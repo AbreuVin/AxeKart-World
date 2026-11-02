@@ -7,7 +7,7 @@ const TITLE_A := "Axé"
 const TITLE_B := "Kart"
 const SUBTITLE := "Mais Bananas, Mais Bally, Mais Pomodoro e Mais Velocidade"
 const RACE_SCENE := "res://scenes/Main.tscn"
-const KART_SHEET := "res://assets/karts/ciano/sprites/sheet.png"
+const KART_SHEET := "res://assets/karts/vinicius/sprites/sheet.png"
 
 var _t := 0.0
 var _dust: Array[Vector3] = []   # x, y, velocidade
@@ -123,8 +123,8 @@ func _draw() -> void:
 		draw_rect(Rect2(x, 520, 44, 6), Color(InterfaceTheme.TEXT, 0.7))
 	# kart passando (quadro de lado da folha de 8 direções)
 	if _kart_tex:
-		var src := Rect2(128 * 6, 0, 128, 128)
-		draw_texture_rect_region(_kart_tex, Rect2(_kart_x, 412, 128, 128), src)
+		var src := Rect2(256 * 2, 0, 256, 256)
+		draw_texture_rect_region(_kart_tex, Rect2(_kart_x, 368, 176, 176), src)
 		for s in 4:
 			draw_circle(Vector2(_kart_x - 8 - s * 18, 520 - s * 3), 6.0 - s, Color(InterfaceTheme.TEXT, 0.25 - s * 0.05))
 	# poeira
